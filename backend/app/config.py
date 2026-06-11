@@ -1,4 +1,3 @@
-from ast import List
 from typing import List
 from pydantic_settings import BaseSettings
 
@@ -22,6 +21,7 @@ class Settings(BaseSettings):
     upload_dir: str = "uploads/"
 
     # Gabarito (configurável sem mexer no código)
+    total_questoes: int = 25
     alternativas: List[str] = ["A", "B", "C", "D", "E"]
 
     class Config:
