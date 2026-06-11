@@ -1,0 +1,34 @@
+# Ambiente virtual
+venv/
+.venv/
+
+# Banco de dados local
+*.db
+*.sqlite3
+
+# Variáveis de ambiente
+.env
+
+# Uploads (imagens de usuários)
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# React (gerado automaticamente)
+frontend/node_modules/
+frontend/dist/
