@@ -2,6 +2,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
+from app.database.database import engine, Base
+import app.models  # Garante que os modelos são carregados antes do create_all
+
+# Cria todas as tabelas no banco ao iniciar (se não existirem)
+Base.metadata.create_all(bind=engine)
 
 # Criação da instância principal da aplicação
 app = FastAPI(
