@@ -3,15 +3,13 @@ from datetime import datetime
 from app.models.usuario import PerfilUsuario
 
 
-# Dados necessários para criar um usuário
 class UsuarioCreate(BaseModel):
     nome: str
-    email: EmailStr        # Valida formato de email automaticamente
+    email: EmailStr
     senha: str
     perfil: PerfilUsuario = PerfilUsuario.ALUNO
 
 
-# Dados retornados pela API (nunca expõe a senha!)
 class UsuarioResponse(BaseModel):
     id: int
     nome: str
@@ -21,4 +19,16 @@ class UsuarioResponse(BaseModel):
     criado_em: datetime
 
     class Config:
-        from_attributes = True  # Permite converter objeto SQLAlchemy → Pydantic
+        from_attributes = True
+
+
+class LoginRequest(BaseModel):
+    email: EmailStr
+    senha: str
+
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    perfil: PerfilUsuario
+    nome: str

@@ -8,7 +8,7 @@ class Gabarito(Base):
     __tablename__ = "gabaritos"
 
     id = Column(Integer, primary_key=True, index=True)
-    prova_id = Column(Integer, ForeignKey("provas.id"), unique=True, nullable=False)
+    prova_id = Column(Integer, ForeignKey("provas.id"), nullable=False)
     questao_numero = Column(Integer, nullable=False)
     resposta_correta = Column(String(1), nullable=False)  # "A", "B", "C", "D" ou "E"
 
