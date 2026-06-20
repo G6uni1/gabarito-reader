@@ -15,11 +15,8 @@ bcrypt==3.2.2
 python-multipart==0.0.9
 
 # Visão computacional
-opencv-python==4.9.0.80
+opencv-contrib-python==4.13.0.86
 numpy==1.26.4
-
-# QR Code
-pyzbar==0.1.9
 
 # Variáveis de ambiente
 python-dotenv==1.0.1
@@ -33,3 +30,5 @@ pydantic-settings==2.14.1
 
 # Validação de email
 email-validator==2.3.0
+
+

@@ -9,6 +9,48 @@ from app.models.prova import Prova
 from app.models.gabarito import Gabarito
 from app.schemas.prova import ProvaCreate, ProvaResponse
 
+import os
+from fastapi.responses import FileResponse
+from app.services.folha_service import gerar_folha_aluno, salvar_folha
+from app.models.usuario import Usuario as UsuarioModel
+
+
+@router.get("/{prova_id}/folha/{aluno_id}")
+def gerar_folha_resposta(
+    prova_id: int,
+    aluno_id: int,
+    db: Session = Depends(get_db),
+    professor: Usuario = Depends(get_professor_atual)
+):
+    """
+    Gera e retorna a folha de resposta para um aluno específico.
+    O professor baixa e entrega ao aluno antes da prova.
+    """
+    prova = db.query(Prova).filter(Prova.id == prova_id).first()
+    if not prova:
+        raise HTTPException(status_code=404, detail="Prova não encontrada")
+
+    aluno = db.query(UsuarioModel).filter(UsuarioModel.id == aluno_id).first()
+    if not aluno:
+        raise HTTPException(status_code=404, detail="Aluno não encontrado")
+
+    folha = gerar_folha_aluno(
+        aluno_id=aluno.id,
+        aluno_nome=aluno.nome,
+        prova_id=prova.id,
+        prova_titulo=prova.titulo,
+        total_questoes=prova.total_questoes,
+    )
+
+    caminho = f"uploads/folha_prova{prova_id}_aluno{aluno_id}.png"
+    salvar_folha(folha, caminho)
+
+    return FileResponse(
+        caminho,
+        media_type="image/png",
+        filename=f"folha_{aluno.nome.replace(' ', '_')}.png"
+    )
+
 router = APIRouter()
 
 
