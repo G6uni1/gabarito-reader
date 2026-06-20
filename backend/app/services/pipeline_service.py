@@ -1,5 +1,4 @@
 import os
-import shutil
 import uuid
 from typing import Tuple, Optional, Dict
 
@@ -14,7 +13,7 @@ from app.vision.leitor_qrcode import ler_qrcode_com_fallback
 from app.vision.detector_respostas import detectar_todas_respostas
 from app.services.correcao_service import gerar_resultado
 from app.models.prova import Prova
-from app.models.usuario import Usuario, PerfilUsuario
+from app.models.usuario import Usuario
 from app.models.resultado import Resultado
 
 

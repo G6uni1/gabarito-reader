@@ -16,7 +16,7 @@ python-multipart==0.0.9
 
 # Visão computacional
 opencv-contrib-python==4.13.0.86
-numpy==1.26.4
+numpy==2.4.6
 
 # Variáveis de ambiente
 python-dotenv==1.0.1
