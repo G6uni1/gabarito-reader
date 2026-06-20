@@ -47,8 +47,7 @@ def ler_qrcode_com_fallback(imagem: np.ndarray) -> Optional[int]:
             return aluno_id
 
     # Tentativa 3: aumentar contraste
-    equalizada = cv2.equalizeHist(
-        cinza if len(imagem.shape) == 3 else imagem
-    )
+    imagem_cinza = cinza if len(imagem.shape) == 3 else imagem
+    equalizada = cv2.equalizeHist(imagem_cinza)
     aluno_id = extrair_aluno_id(equalizada)
     return aluno_id

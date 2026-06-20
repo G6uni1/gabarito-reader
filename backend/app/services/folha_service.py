@@ -2,7 +2,7 @@ import io
 import qrcode
 import cv2
 import numpy as np
-from typing import Tuple
+
 
 from app.vision.leitor_qrcode import gerar_conteudo_qrcode
 from app.vision.layout_folha import (

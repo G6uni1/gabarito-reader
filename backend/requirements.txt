@@ -31,4 +31,7 @@ pydantic-settings==2.14.1
 # Validação de email
 email-validator==2.3.0
 
+# Geração de QR Codes
+qrcode[pil]==7.4.2
+
 
