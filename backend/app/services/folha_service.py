@@ -2,7 +2,7 @@ import io
 import qrcode
 import cv2
 import numpy as np
-
+from app.vision.layout_folha import calcular_layout
 
 from app.vision.leitor_qrcode import gerar_conteudo_qrcode
 from app.vision.layout_folha import (
@@ -88,8 +88,21 @@ def gerar_folha_aluno(
                     (x - 4, 190), cv2.FONT_HERSHEY_SIMPLEX, 0.4, 0, 1)
 
     # ─── Questões ────────────────────────────────────────────────────────────
+    layout = calcular_layout(total_questoes)
+    questao_inicio_y = layout["questao_inicio_y"]
+    questao_altura = layout["questao_altura"]
+
     for numero in range(1, total_questoes + 1):
-        y = QUESTAO_INICIO_Y + (numero - 1) * QUESTAO_ALTURA + QUESTAO_ALTURA // 2
+        y = questao_inicio_y + (numero - 1) * questao_altura + questao_altura // 2
+
+        cv2.putText(folha, f"{numero:2d}.",
+                    (45, y + 5), cv2.FONT_HERSHEY_SIMPLEX, 0.4, 0, 1)
+
+        for letra, x in ALTERNATIVAS_X.items():
+            cv2.circle(folha, (x, y), RAIO_BOLINHA, 0, 1)
+            cv2.putText(folha, letra,
+                        (x - 4, y + 4),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.3, 0, 1)
 
         # Número da questão
         cv2.putText(folha, f"{numero:2d}.",
