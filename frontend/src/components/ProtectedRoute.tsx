@@ -14,7 +14,9 @@ export default function ProtectedRoute({ children, perfil }: ProtectedRouteProps
 
     if (carregando) return <LoadingSpinner />
     if (!usuario) return <Navigate to="/login" replace />
-    if (perfil && usuario.perfil !== perfil) return <Navigate to="/login" replace />
-
+    if (perfil && usuario.perfil !== perfil) {
+    const acessoAdmin = perfil === "professor" && usuario.perfil === "admin"
+    if (!acessoAdmin) return <Navigate to="/login" replace />
+}
     return <>{children}</>
 }
